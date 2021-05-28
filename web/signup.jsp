@@ -17,6 +17,8 @@
 			exists. Please try with different user name.
 		</p>
 	</c:if>
+                <p style="color: red;">${message}
+		</p>
 		<form action="reg.jsp" method="post">
 			<label for="username">Username</label> 
 			<input type="text" name="username" placeholder="Username" required/>
@@ -25,7 +27,7 @@
 			<input type="text" name="email" placeholder="Email" required/>
 			
 			<label for="password">Password</label> 
-			<input type="password" name="password" placeholder="Password" required/>
+			<input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required/>
 			
 			<label for="cpassword">Confirm Password</label> 
 			<input type="password" name="cpassword" placeholder="Re-Enter Password" required/>

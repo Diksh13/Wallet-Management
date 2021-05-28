@@ -11,24 +11,31 @@ Query q = new Query();
 		String cashString = request.getParameter("cash");
 		Double cash = null;
 		if (cashString == null || cashString == "") {
-			request.setAttribute("message", "Invalid amount entered.");
-			doGet(request, response);
-			return;
+			request.setAttribute("message", "Invalid amount entered.");	
 		}
 		try {
 			cash = Double.parseDouble(cashString);
+                        if(cash<0)
+                        {
+                            request.setAttribute("message", "Invalid amount entered.");
+                           }
 		} catch (NumberFormatException e) {
 			request.setAttribute("message", "Invalid amount entered.");
-			doGet(request, response);
-			return;
+			%>
+                                <jsp:forward page="walletpage.jsp"/>
+                                <%
 		}
-		
+		if ((cash>0 && cash<=50000))
+{
 		Wallet userWallet = q.getUserWalletBalance(user.getId());
 		
 		Wallet updatedWallet = q.updateUserWalletBalance(user.getId(), userWallet.getCash()+cash);
 		
 		request.setAttribute("wallet", updatedWallet);
-		request.setAttribute("user", user);
+		request.setAttribute("user", user);}
+else{
+	request.setAttribute("message", "You have exceeded the maximum limit");
+}
                 %>
                                 <jsp:forward page="walletpage.jsp"/>
                                 <%

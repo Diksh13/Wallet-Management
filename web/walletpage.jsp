@@ -40,6 +40,11 @@
                     
 			request.setAttribute("message", "Your Balance is below the minimum balance i.e. Rs 100. Please add cash to the wallet");
                 }
+//                if (userWallet.getCash() > 50000)
+//                {
+//                    
+//			request.setAttribute("message", "You have exceeded the maximum limit");
+//                }
 		request.setAttribute("wallet", userWallet);
 		request.setAttribute("user", user);
 

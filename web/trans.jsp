@@ -40,6 +40,6 @@ Query q = new Query();
                                 <jsp:forward page="Transaction.jsp"/>
                                 <%
 
-		doGet(request, response);
+		
 		
 %>

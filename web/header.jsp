@@ -96,7 +96,7 @@ li a:hover:not(.active) {
 			
                                         <li style="float:right;"><a 
 				href="signup.jsp">Register</a></li>
-                                 <li style="float:right;"><a  href="stats.jsp">Stats</a></li>
+                                 <li style="float:right;"><a  href="walletstats.jsp">Stats</a></li>
 			<li style="float:right;"><a  href="Transaction.jsp">Transactions</a></li>	
 			<li style="float:right;"><a href="walletpage.jsp">Wallet</a></li>	
 			

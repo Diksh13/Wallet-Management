@@ -76,11 +76,25 @@
 			<br>
 			<br>
 			<label for="comments">Transaction Comments</label> 
-			<input type="text" name="comments" placeholder="Enter transaction comments" required/>
+                        <div style="width:300px;">
+                            <select name="comments" required >
+                            <option>Select One</option>
+                            <option value="Travel">Travel</option>
+                            <option value="Food & Beverage">Food & Beverage</option>
+                            <option value="Shopping">Shopping</option>                            
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Recharges">Recharges</option>
+                            <option value="Bill Payment">Bill Payment</option>
+                            <option value="Transaction">Transaction</option>
+                            <option value="Others" >Others</option>
+  </select>
+</div>
+                        
+			<!--<input type="text" name="comments" placeholder="Enter transaction comments" required/>-->
 			
 			<input type="submit" value="Do Transaction">
 		</form>
-		
+                <a href="https://paytm.com/" style="text-decoration:none;"><p style="font-size:15px;color:#B65FCF;">Perform Transaction through Payment Gateway</p></a>
 	</div>
                 <jsp:include page="footer.jsp" />
 </body>

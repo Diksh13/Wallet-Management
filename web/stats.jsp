@@ -10,20 +10,18 @@
 </head>
 <body>
     <%
-        
-                Query q = new Query();
-		User user = (User) session.getAttribute("user");
-		Wallet userWallet = q.getUserWalletBalance(user.getId());
-                if (userWallet.getCash() < 100)
-                {
-                    
-			request.setAttribute("message", "Your Balance is below the minimum balance i.e. Rs 100. Please add cash to the wallet");
-                }
-		request.setAttribute("wallet", userWallet);
-		request.setAttribute("user", user);
-
+//        Query q=new Query();
+//        session = request.getSession(false);
+//		User user = (User) session.getAttribute("user");
+//		User user = (User) session.getAttribute("user");
+//                int a=user.getId();
+//                List<Integer> BarData  = new ArrayList<Integer>();
+//                q.getBarData(user);
+                
         %>
+    
     <jsp:include page="header.jsp" />
+    <br>
     <div class="content">
                 <div class="container-fluid">
                     <div class="row">
@@ -43,9 +41,18 @@
                                 <jsp:include page="footer.jsp" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
-var barColors = ["red", "green","blue","orange","brown"];
+     var d = new Date();
+    var weekday = new Array(7);
+  weekday[0] = "Sunday";
+  weekday[1] = "Monday";
+  weekday[2] = "Tuesday";
+  weekday[3] = "Wednesday";
+  weekday[4] = "Thursday";
+  weekday[5] = "Friday";
+  weekday[6] = "Saturday";
+var xValues=${BarDataX};
+var yValues = ${BarDataY};
+var barColors = ["red", "green","blue","orange","brown","yellow","black","grey"];
 
 new Chart("myChart", {
   type: "bar",
@@ -60,24 +67,41 @@ new Chart("myChart", {
     legend: {display: false},
     title: {
       display: true,
-      text: "World Wine Production 2018"
+      text: "Weekly Stats : "+weekday[d.getDay()],
     }
   }
 });
 </script>
 <script>
-var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-var yValues = [55, 49, 44, 24, 15];
+var d = new Date();
+var month = new Array();
+  month[0] = "January";
+  month[1] = "February";
+  month[2] = "March";
+  month[3] = "April";
+  month[4] = "May";
+  month[5] = "June";
+  month[6] = "July";
+  month[7] = "August";
+  month[8] = "September";
+  month[9] = "October";
+  month[10] = "November";
+  month[11] = "December";
+var xValues=${BarDataMonthX};
+var yValues = ${BarDataMonthY};
 var barColors = [
   "#b91d47",
   "#00aba9",
   "#2b5797",
   "#e8c3b9",
-  "#1e7145"
+  "#1e7145",
+  "#FFD700",
+  "#000000",
+  "#808080"
 ];
 
 new Chart("myPieChart", {
-  type: "pie",
+  type: "doughnut",
   data: {
     labels: xValues,
     datasets: [{
@@ -88,7 +112,7 @@ new Chart("myPieChart", {
   options: {
     title: {
       display: true,
-      text: "World Wide Wine Production 2018"
+      text: "Monthly Stats : "+month[d.getMonth()],
     }
   }
 });

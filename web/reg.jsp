@@ -4,6 +4,14 @@ pageEncoding="UTF-8"%>
 
 
 <%
+    if(!(request.getParameter("password").equals(request.getParameter("cpassword"))))
+    {
+        request.setAttribute("message", "Password and Confirm Password doesn't match");
+		
+                                %>
+                                <jsp:forward page="signup.jsp"/>
+                                <%
+    }
 Query q = new Query();
 
 String query = "insert into user(username,email,password) values(?,?,?)";
@@ -41,7 +49,7 @@ String query = "insert into user(username,email,password) values(?,?,?)";
                                 %>
                                 <jsp:forward page="SignIn.jsp"/>
                                 <%
-				return;
+				
 			}
 		} catch (SQLException e) {
                         out.println(e);
