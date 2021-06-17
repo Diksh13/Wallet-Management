@@ -9,21 +9,26 @@
 <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-    <%
-//        Query q=new Query();
-//        session = request.getSession(false);
-//		User user = (User) session.getAttribute("user");
-//		User user = (User) session.getAttribute("user");
-//                int a=user.getId();
-//                List<Integer> BarData  = new ArrayList<Integer>();
-//                q.getBarData(user);
-                
-        %>
     
     <jsp:include page="header.jsp" />
     <br>
     <div class="content">
                 <div class="container-fluid">
+                    <form action="walletstats.jsp" method="post">
+                    <label for="comments" style="color: white;font-size: 20px;"><b>Transaction Stats</b></label> 
+                        <div style="width:300px;">
+                            <select name="stats" required>
+                            <option>Select One</option>
+                            <option value="Today">Today</option>
+                            <option value="Weekly">Weekly</option>
+                            <option value="Monthly">Monthly</option>                            
+                            <option value="Yearly">Yearly</option>         
+  </select>
+</div>
+              
+                            <input type="submit" value="Go" style="position:absolute;left:320px;background-color:white;color:black;top:201px;">     
+                    </form>
+                   
                     <div class="row">
                         <div class="col-md-6">
     
@@ -41,15 +46,8 @@
                                 <jsp:include page="footer.jsp" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 <script>
-     var d = new Date();
-    var weekday = new Array(7);
-  weekday[0] = "Sunday";
-  weekday[1] = "Monday";
-  weekday[2] = "Tuesday";
-  weekday[3] = "Wednesday";
-  weekday[4] = "Thursday";
-  weekday[5] = "Friday";
-  weekday[6] = "Saturday";
+   var mes1="${St}";
+   var mes2="${Stname}";
 var xValues=${BarDataX};
 var yValues = ${BarDataY};
 var barColors = ["red", "green","blue","orange","brown","yellow","black","grey"];
@@ -67,28 +65,14 @@ new Chart("myChart", {
     legend: {display: false},
     title: {
       display: true,
-      text: "Weekly Stats : "+weekday[d.getDay()],
+      text: mes1+ " : "+mes2,
     }
   }
 });
 </script>
 <script>
-var d = new Date();
-var month = new Array();
-  month[0] = "January";
-  month[1] = "February";
-  month[2] = "March";
-  month[3] = "April";
-  month[4] = "May";
-  month[5] = "June";
-  month[6] = "July";
-  month[7] = "August";
-  month[8] = "September";
-  month[9] = "October";
-  month[10] = "November";
-  month[11] = "December";
-var xValues=${BarDataMonthX};
-var yValues = ${BarDataMonthY};
+var xValues=${BarDataAllX};
+var yValues = ${BarDataAllY};
 var barColors = [
   "#b91d47",
   "#00aba9",
@@ -112,7 +96,7 @@ new Chart("myPieChart", {
   options: {
     title: {
       display: true,
-      text: "Monthly Stats : "+month[d.getMonth()],
+      text: "Transaction Stats : Overall",
     }
   }
 });

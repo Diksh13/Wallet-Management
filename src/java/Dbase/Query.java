@@ -325,8 +325,57 @@ public ArrayList<ArrayList<String>> getWeekBar(User user){
 		return null;
         }
 
-public ArrayList<ArrayList<String>> getMonthBar(User user){
-            String query = "SELECT comments,sum(amount) from transactions where user=? and month(time)=month(CURDATE()) GROUP BY comments";
+public ArrayList<ArrayList<String>> getAllBar(User user){
+            String query = "SELECT comments,sum(amount) from transactions where user=? GROUP BY comments";
+                ArrayList<ArrayList<String>> BarData=new ArrayList<ArrayList<String>>(2);
+		ArrayList<String> BarDataX  = new ArrayList<String>();
+                ArrayList<String> BarDataY = new ArrayList<String>();
+		PreparedStatement ps = null;
+                Connection conn = DbConnection.getConnection();
+		try {
+			ps = conn.prepareStatement(query);
+			ps.setInt(1, user.getId());
+			ResultSet rs = ps.executeQuery();
+                        while(rs.next()){
+                            System.out.println(rs.getString(1));
+                            System.out.println(rs.getInt(2));
+                            BarDataX.add("\""+rs.getString(1)+"\"");
+                            BarDataY.add(rs.getString(2));
+                        }
+                        BarData.add(BarDataX);
+                        BarData.add(BarDataY);
+                        return BarData;
+                        
+                        
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+        }
+
+
+public ArrayList<ArrayList<String>> getBar(User user, String stat){
+    String query=null;
+    if(stat.equals("Today")){
+           query = "SELECT comments,sum(amount) from transactions where user=? and date(time)=CURDATE() GROUP BY comments";
+    }
+    else if(stat.equals("Weekly")){
+    
+            query = "SELECT comments,sum(amount) from transactions where user=? and week(time)=week(CURDATE()) GROUP BY comments";
+}
+    else if(stat.equals("Monthly")){
+            query = "SELECT comments,sum(amount) from transactions where user=? and month(time)=month(CURDATE()) GROUP BY comments";}
+    else{
+            query = "SELECT comments,sum(amount) from transactions where user=? and year(time)=year(CURDATE()) GROUP BY comments";
+    }
+    
+    
                 ArrayList<ArrayList<String>> BarData=new ArrayList<ArrayList<String>>(2);
 		ArrayList<String> BarDataX  = new ArrayList<String>();
                 ArrayList<String> BarDataY = new ArrayList<String>();

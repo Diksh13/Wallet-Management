@@ -9,7 +9,7 @@ Query q = new Query();
 			session.invalidate();
 			session.setMaxInactiveInterval(1);
 		}%>
-                                <jsp:forward page="index.jsp"/>
+                                <jsp:forward page="SignIn.jsp"/>
                                 <%
 		return;
 %>

@@ -31,6 +31,7 @@
 </head>
 <body>
     <%
+        
         Query q=new Query();
 		User user = (User) session.getAttribute("user");
 		List<Transaction> transactions = q.getTransactions(5, user);
@@ -39,7 +40,9 @@
     <jsp:include page="header.jsp" />
 	<div class="transTable" style="float: right;">
             
-				<h2 style="color:white;"><b>My Last 5 transactions</b></h2>
+				<h3 style="color:white;"><b>My Last 5 transactions</b></h3>
+                                <!--<input type="number" value="5" name="num" style="width:100px;height:30px;border-radius: 5px;" onchange="walletpage.jsp"><br><br>-->
+                                
 		<table id="t1">
 		<thead>
 				<th colspan="1">Transaction Id</th>
